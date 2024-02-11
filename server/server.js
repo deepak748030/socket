@@ -12,6 +12,12 @@ io.on('connection', (socket) => {
     // When a client connects, log their socket ID
     console.log(`A client connected with socket ID: ${socket.id}`);
 
+    socket.on('chat message', (msg => {
+        console.log(`${socket.id} : ${msg}`)
+        const data = `${socket.id} : ${msg}`;
+        io.emit('chat message', msg);
+    }))
+
     socket.on('disconnect', () => {
         // When a client disconnects, log their socket ID
         console.log(`A client disconnected with socket ID: ${socket.id}`);
